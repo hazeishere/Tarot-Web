@@ -6,12 +6,14 @@ app = Flask(__name__)
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
-        return redirect(url_for('result'))
+        question = request.form['question']
+        return redirect(url_for('result', question=question))
     return render_template('home.html')
 
 @app.route('/result')
 def result():
-    return render_template('result.html')
+    question = request.args.get('question')
+    return render_template('result.html', question=question)
 
 @app.route('/get_card')
 def get_card():
@@ -20,3 +22,5 @@ def get_card():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5017)
+
+    # add asked q to result.html

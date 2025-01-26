@@ -1,0 +1,90 @@
+/* General body styling to center the buttons */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+}
+
+/* Styling for the buttons container */
+.buttons-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* General button styling */
+.card-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.card-btn:hover {
+    background-color: #45a049;
+}
+
+.card-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Home link styling */
+.home-link {
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.home-link:hover {
+    text-decoration: underline;
+}
+
+/* Styling for the card details container */
+.cards-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
+}
+
+/* Individual card details styling */
+.card-details {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    display: none; /* Initially hide card details */
+    text-align: center;
+}
+
+.card-details h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.card-details p {
+    font-size: 16px;
+    color: #555;
+}
+
+.card-details img {
+    width: 150px;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+}

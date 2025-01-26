@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css')}}">
+    <title>results</title>
+</head>
+<body>
+    <div class="buttons-container">
+        <button id="first-card-btn" class="card-btn">First Card</button>
+        <button id="second-card-btn" class="card-btn">Second Card</button>
+        <button id="third-card-btn" class="card-btn">Third Card</button>
+    </div>
+    <a href="/" class="home-link">Home</a>
+    
+    <div class="cards-container">
+        <div id="first-card-details" class="card-details">
+            <!-- First card details will be displayed here -->
+        </div>
+        <div id="second-card-details" class="card-details">
+            <!-- Second card details will be displayed here -->
+        </div>
+        <div id="third-card-details" class="card-details">
+            <!-- Third card details will be displayed here -->
+        </div>
+    </div>
+    
+
+    <script>
+        function createCardHandler(buttonId, detailsId) {
+            const button = document.getElementById(buttonId);
+            const cardDetailsDiv = document.getElementById(detailsId);
+
+            button.addEventListener('click', async () => {
+                // Disable the button after click
+                button.disabled = true;
+
+                try {
+                    // Fetch card data (replace '/get_first_card' with the appropriate endpoint)
+                    const response = await fetch('/get_card');
+                    const card = await response.json();
+                    console.log(card);
+
+                    // Store the card details in the div (but keep it hidden for now)
+                    cardDetailsDiv.innerHTML = `
+                        <h2>${card.name}</h2>
+                        <p>Keywords: ${card.keywords}</p>
+                        <img src="/static/${card.image}" alt="${card.name}">
+                    `;
+
+                    // Check if all buttons are pressed
+                    const allButtonsPressed = Array.from(document.querySelectorAll('.card-btn')).every(btn => btn.disabled);
+                    if (allButtonsPressed) {
+                        // Show all card details
+                        document.querySelectorAll('.card-details').forEach(detail => {
+                            detail.style.display = 'block';
+                        });
+                    }
+                } catch (error) {
+                    console.error(`Error fetching the card:`, error);
+                    // Re-enable the button if there was an error
+                    button.disabled = false;
+                }
+            });
+        }
+
+        // Set up handlers for all three buttons
+        createCardHandler('first-card-btn', 'first-card-details');
+        createCardHandler('second-card-btn', 'second-card-details');
+        createCardHandler('third-card-btn', 'third-card-details');
+    </script>
+</body>
+</html>
